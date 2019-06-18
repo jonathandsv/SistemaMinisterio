@@ -18,4 +18,10 @@
     <Folder Include="wwwroot\font\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\SistemaMinisterio.Domain\SistemaMinisterio.Domain.csproj" />
+    <ProjectReference Include="..\SistemaMinisterio.Infra\SistemaMinisterio.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
