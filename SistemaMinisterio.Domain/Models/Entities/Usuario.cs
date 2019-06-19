@@ -8,12 +8,12 @@ namespace SistemaMinisterio.Domain.Models.Entities
 
     public class Usuario : BaseEntity
     {
-        public Usuario(int id, string nome, string sobrenome, int idPerfilMembro, int idPerfilUsuario, int senha, string email, string sexo, int idade)
+        public Usuario(int id, string nome, string userName, string sobrenome, int idPerfilUsuario, string senha, string email, string sexo, int idade)
             : base(id)
         {
             Nome = nome;
+            UserName = userName;
             Sobrenome = sobrenome;
-            IdPerfilMembro = idPerfilMembro;
             IdPerfilUsuario = idPerfilUsuario;
             Senha = senha;
             Email = email;
@@ -21,14 +21,15 @@ namespace SistemaMinisterio.Domain.Models.Entities
             Idade = idade;
         }
 
-        public string Nome { get; set; }
-        public string Sobrenome { get; set; }
-        public int IdPerfilMembro { get; set; }
-        public int IdPerfilUsuario { get; set; }
-        public int Senha { get; set; }
-        public string Email { get; set; }
-        public string Sexo { get; set; }
-        public int Idade { get; set; }
+        public string Nome { get; private set; }
+        public string UserName { get; private set; }
+        public string Sobrenome { get; private set; }
+        public int IdPerfilMembro { get; private set; }
+        public int IdPerfilUsuario { get; private set; }
+        public string Senha { get; private set; }
+        public string Email { get; private set; }
+        public string Sexo { get; private set; }
+        public int Idade { get; private set; }
     }
 
 }

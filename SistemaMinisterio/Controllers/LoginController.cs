@@ -3,6 +3,7 @@ using SistemaMinisterio.Domain.Models.Entities;
 using SistemaMinisterio.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using SistemaMinisterio.Domain.Models.Utils;
 
 namespace SistemaMinisterio.Controllers
 {
@@ -37,7 +38,22 @@ namespace SistemaMinisterio.Controllers
                     return RedirectToAction("Index", "Login");
             }
             else
+            {
+                ViewBag.Mensagem = new RetornoMensagem(
+                    mensagem: "Usuario e Senha em branco!",
+                    tipo: Domain.Models.Enuns.Tipos.Senha
+                    );
                 return RedirectToAction("Index", "Login");
+            }
+                
+        }
+
+        public IActionResult Logoff()
+        {
+            HttpContext.Session.Remove("usuarioLogadoID");
+            HttpContext.Session.Remove("nomeUsuarioLogado");
+
+            return RedirectToAction("Index");
         }
     }
 }

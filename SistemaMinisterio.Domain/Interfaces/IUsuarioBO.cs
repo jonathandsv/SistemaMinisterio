@@ -8,6 +8,6 @@ namespace SistemaMinisterio.Domain.Interfaces
     public interface IUsuarioBO
     {
         Usuario GetUsuario(int id);
-        Usuario GetUsuario(string name);
+        Usuario GetUsuario(string userName);
     }
 }
