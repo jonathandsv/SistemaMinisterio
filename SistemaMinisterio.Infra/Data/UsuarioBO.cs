@@ -9,7 +9,7 @@ namespace SistemaMinisterio.Infra.Data
 {
     public class UsuarioBO : IUsuarioBO
     {
-        private string _connectionString;
+        public readonly string _connectionString;
 
         public UsuarioBO(string connectionString)
         {
@@ -65,7 +65,7 @@ namespace SistemaMinisterio.Infra.Data
         {
             try
             {
-                string buscarUsuario = @"SELECT * FROM Usuarios WHERE IDUsuario = @name";
+                string buscarUsuario = @"SELECT * FROM Usuarios WHERE UserName = @userName";
 
                 Usuario usuario = null;
 
@@ -75,7 +75,7 @@ namespace SistemaMinisterio.Infra.Data
 
                     using (var sqlCommand = new SqlCommand(buscarUsuario, sqlConnection))
                     {
-                        sqlCommand.Parameters.Add("@name", System.Data.SqlDbType.VarChar, 50).Value = userName;
+                        sqlCommand.Parameters.Add("@userName", System.Data.SqlDbType.VarChar, 50).Value = userName;
 
                         SqlDataReader reader = sqlCommand.ExecuteReader();
 

@@ -12,7 +12,7 @@ namespace SistemaMinisterio.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Login");
         }
 
         public IActionResult Privacy()

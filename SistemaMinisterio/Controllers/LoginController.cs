@@ -4,6 +4,7 @@ using SistemaMinisterio.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using SistemaMinisterio.Domain.Models.Utils;
+using SistemaMinisterio.Domain.ViewModels;
 
 namespace SistemaMinisterio.Controllers
 {
@@ -23,12 +24,12 @@ namespace SistemaMinisterio.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(Usuario user)
+        public IActionResult Login(UsuarioVM user)
         {
             if (user != null)
             {
-                var v = _usuarioBO.GetUsuario(user.Nome);
-                if (v.Nome == user.Nome.ToLower() && v.Senha == user.Senha)
+                var v = _usuarioBO.GetUsuario(user.UserName);
+                if (v.UserName == user.UserName.ToLower() && v.Senha == user.Senha)
                 {
                     HttpContext.Session.SetString("usuarioLogadoID", v.Id.ToString());
                     HttpContext.Session.SetString("nomeUsuarioLogado", v.Nome);

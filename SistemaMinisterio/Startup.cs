@@ -35,8 +35,10 @@ namespace SistemaMinisterio
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            Func<IServiceProvider, UsuarioBO> _usuarioBO = _ => new UsuarioBO("Schema");
+            services.AddScoped<IUsuarioBO, UsuarioBO>(_usuarioBO);
 
-            services.AddTransient<IUsuarioBO, UsuarioBO>();
+            //services.AddTransient<IUsuarioBO, UsuarioBO>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
