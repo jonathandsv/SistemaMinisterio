@@ -9,5 +9,7 @@ namespace SistemaMinisterio.Domain.Interfaces
     {
         Usuario GetUsuario(int id);
         Usuario GetUsuario(string userName);
+        int CreateLogin(Usuario usuario);
+        void RecoverSenha(Usuario usuario);
     }
 }

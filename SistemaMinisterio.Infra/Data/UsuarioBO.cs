@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using SistemaMinisterio.Domain.Interfaces;
@@ -14,6 +15,44 @@ namespace SistemaMinisterio.Infra.Data
         public UsuarioBO(string connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public int CreateLogin(Usuario usuario)
+        {
+            var result = 0;
+            try
+            {
+                string inserirUsuario = @"INSERT INTO Usuarios (Nome, IDPerfilUsuario, IDPerfilMembro, Senha, Email, UserName, Sexo)
+                                                      Value (@Nome, @IDPerfilUsuario, @IDPerfilMembro, @Senha, @Email, @UserName, @Sexo)";
+                
+                using (var sqlConnection = new SqlConnection(_connectionString))
+                {
+                    
+                    var sqlCommand = new SqlCommand(inserirUsuario, sqlConnection);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.Add("@Nome", SqlDbType.VarChar).Value = usuario.Nome;
+                    sqlCommand.Parameters.Add("@IDPerfilUsuario", SqlDbType.Int).Value = usuario.IdPerfilUsuario;
+                    sqlCommand.Parameters.Add("@IDPerfilMembro", SqlDbType.Int).Value = usuario.IdPerfilMembro;
+                    sqlCommand.Parameters.Add("@Senha", SqlDbType.VarChar).Value = usuario.Senha;
+                    sqlCommand.Parameters.Add("@Email", SqlDbType.VarChar).Value = usuario.Email;
+                    sqlCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = usuario.UserName;
+                    sqlCommand.Parameters.Add("@Sexo", SqlDbType.VarChar).Value = usuario.Sexo;
+
+                    sqlConnection.Open();
+
+                    result = sqlCommand.ExecuteNonQuery();
+
+                    sqlConnection.Close();
+                }
+
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public Usuario GetUsuario(int id)
@@ -104,6 +143,11 @@ namespace SistemaMinisterio.Infra.Data
 
                 throw ex;
             }
+        }
+
+        public void RecoverSenha(Usuario usuario)
+        {
+            throw new NotImplementedException();
         }
     }
 }

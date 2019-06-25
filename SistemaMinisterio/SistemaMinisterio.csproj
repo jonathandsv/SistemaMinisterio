@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Login\Index.cshtml" />
+    <Content Remove="Views\Login\Register.cshtml" />
   </ItemGroup>
 
 
@@ -24,6 +25,7 @@
 
 
   <ItemGroup>
+    <None Include="Views\Login\Register.cshtml" />
     <None Include="Views\Login\Index.cshtml" />
   </ItemGroup>
 

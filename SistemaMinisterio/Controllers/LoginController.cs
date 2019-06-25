@@ -23,6 +23,11 @@ namespace SistemaMinisterio.Controllers
             return View();
         }
 
+        public IActionResult RegistrarUsuario()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Login(UsuarioVM user)
         {
@@ -55,6 +60,18 @@ namespace SistemaMinisterio.Controllers
             HttpContext.Session.Remove("nomeUsuarioLogado");
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult RegisterUsuario(Usuario usuario)
+        {
+            var result = _usuarioBO.CreateLogin(usuario);
+
+            if (result > 0)
+                ViewBag.MensagemSucesso("Usuario Adicionado Com Sucesso!");
+            else
+                ViewBag.MensagemErro("Problema ao  inserir Usuario, por favor tente novamente!");
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }
